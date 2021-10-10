@@ -48,7 +48,8 @@ MonoBehaviour:
   PlayerInput: {fileID: 0}
   CharacterMovement: {fileID: 520917357}
   PlayerRigidBody: {fileID: 177996094}
-  PlayerMoveSpeed: 5
+  PlayerMoveSpeed: 50
+  PlayerRotationSpeed: 10
   currentMovement: {x: 0, y: 0}
 --- !u!50 &177996094
 Rigidbody2D:
@@ -63,7 +64,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 10
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}

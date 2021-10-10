@@ -12006,6 +12006,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerInput
       objectReference: {fileID: 0}
+    - target: {fileID: 3256035107434287199, guid: e82f06b9676c9684381e3989943d0fe6, type: 3}
+      propertyPath: PlayerCamera
+      value: 
+      objectReference: {fileID: 519420031}
     - target: {fileID: 5332518303099169426, guid: e82f06b9676c9684381e3989943d0fe6, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -12127,10 +12131,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 177996094, guid: 587e2f42129d69649af72d0508a612c3, type: 3}
-      propertyPath: m_LinearDrag
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 3225347847182775933, guid: 587e2f42129d69649af72d0508a612c3, type: 3}
       propertyPath: m_Name
       value: Player
@@ -12183,9 +12183,5 @@ PrefabInstance:
       propertyPath: PlayerInput
       value: 
       objectReference: {fileID: 1052712290378934413}
-    - target: {fileID: 7162153879072468343, guid: 587e2f42129d69649af72d0508a612c3, type: 3}
-      propertyPath: PlayerMoveSpeed
-      value: 50
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587e2f42129d69649af72d0508a612c3, type: 3}

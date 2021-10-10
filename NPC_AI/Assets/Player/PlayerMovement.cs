@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Rigidbody2D PlayerRigidBody;
     public float PlayerMoveSpeed;
+    public float PlayerRotationSpeed;
 
     [SerializeField] private Vector2 currentMovement;
     
@@ -14,22 +15,34 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         RegisterEvents();
-        CharacterMovement.Initialise(PlayerRigidBody, PlayerMoveSpeed);
+        CharacterMovement.Initialise(PlayerRigidBody, PlayerMoveSpeed, PlayerRotationSpeed);
     }
 
     private void RegisterEvents()
     {
-        PlayerInput.Events.Movement += OnMovement;
         EngineManager.Current.Events.EveryPhysicsUpdate += ApplyMovement;
-    }
-
-    private void OnMovement(Vector2 value)
-    {
-        currentMovement = value;
+        EngineManager.Current.Events.EveryPhysicsUpdate += ApplyRotation;
+        PlayerInput.Events.OnLookDirection += ApplyRotation;
+        PlayerInput.Events.OnLookPoint += LookAtPoint;
     }
     
     private void ApplyMovement()
     {
-        CharacterMovement.ApplyMovement(currentMovement);
+        CharacterMovement.ApplyMovement(PlayerInput.MovementVector);
+    }
+    
+    private void ApplyRotation()
+    {
+        CharacterMovement.RotateToTarget();
+    }
+
+    private void ApplyRotation(Vector2 direction)
+    {
+        CharacterMovement.LookInDirection(direction);
+    }
+    
+    private void LookAtPoint(Vector3 point)
+    {
+        CharacterMovement.LookAtPoint(point);
     }
 }

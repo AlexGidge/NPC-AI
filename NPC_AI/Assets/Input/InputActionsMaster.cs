@@ -27,9 +27,17 @@ public class @InputActionsMaster : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Look"",
+                    ""name"": ""PointLook"",
                     ""type"": ""Value"",
                     ""id"": ""f4a2e72b-b6dc-4b02-89da-9ffa62ce2fab"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""DirectionalLook"",
+                    ""type"": ""Value"",
+                    ""id"": ""0b1657df-61ab-4479-9d56-314c31e20851"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -178,34 +186,12 @@ public class @InputActionsMaster : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c1f7a91b-d0fd-4a62-997e-7fb9b69bf235"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""8c8e490b-c610-4785-884f-f04217b23ca4"",
-                    ""path"": ""<Pointer>/delta"",
+                    ""path"": ""<Pointer>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse;Touch"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3e5f5442-8668-4b27-a940-df99bad7e831"",
-                    ""path"": ""<Joystick>/{Hatswitch}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Look"",
+                    ""action"": ""PointLook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -261,6 +247,28 @@ public class @InputActionsMaster : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""XR"",
                     ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b431efab-db75-4b89-a5a8-80186089b5bd"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""DirectionalLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92de372e-ef6c-4d9e-a6a5-280eacba78e1"",
+                    ""path"": ""<Joystick>/{Hatswitch}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
+                    ""action"": ""DirectionalLook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -839,7 +847,8 @@ public class @InputActionsMaster : IInputActionCollection, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+        m_Player_PointLook = m_Player.FindAction("PointLook", throwIfNotFound: true);
+        m_Player_DirectionalLook = m_Player.FindAction("DirectionalLook", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -903,14 +912,16 @@ public class @InputActionsMaster : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_Look;
+    private readonly InputAction m_Player_PointLook;
+    private readonly InputAction m_Player_DirectionalLook;
     private readonly InputAction m_Player_Fire;
     public struct PlayerActions
     {
         private @InputActionsMaster m_Wrapper;
         public PlayerActions(@InputActionsMaster wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @Look => m_Wrapper.m_Player_Look;
+        public InputAction @PointLook => m_Wrapper.m_Player_PointLook;
+        public InputAction @DirectionalLook => m_Wrapper.m_Player_DirectionalLook;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -924,9 +935,12 @@ public class @InputActionsMaster : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
-                @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
-                @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @PointLook.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPointLook;
+                @PointLook.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPointLook;
+                @PointLook.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPointLook;
+                @DirectionalLook.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDirectionalLook;
+                @DirectionalLook.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDirectionalLook;
+                @DirectionalLook.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDirectionalLook;
                 @Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
@@ -937,9 +951,12 @@ public class @InputActionsMaster : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @Look.started += instance.OnLook;
-                @Look.performed += instance.OnLook;
-                @Look.canceled += instance.OnLook;
+                @PointLook.started += instance.OnPointLook;
+                @PointLook.performed += instance.OnPointLook;
+                @PointLook.canceled += instance.OnPointLook;
+                @DirectionalLook.started += instance.OnDirectionalLook;
+                @DirectionalLook.performed += instance.OnDirectionalLook;
+                @DirectionalLook.canceled += instance.OnDirectionalLook;
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
@@ -1100,7 +1117,8 @@ public class @InputActionsMaster : IInputActionCollection, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnLook(InputAction.CallbackContext context);
+        void OnPointLook(InputAction.CallbackContext context);
+        void OnDirectionalLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
     }
     public interface IUIActions
