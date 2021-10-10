@@ -3,26 +3,33 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public PlayerInput PlayerInput;
+    public CharacterMovement CharacterMovement;
+
+    public Rigidbody2D PlayerRigidBody;
+    public float PlayerMoveSpeed;
+
+    [SerializeField] private Vector2 currentMovement;
     
     // Start is called before the first frame update
     void Start()
     {
-        RegisterInputEvents();
+        RegisterEvents();
+        CharacterMovement.Initialise(PlayerRigidBody, PlayerMoveSpeed);
     }
 
-    private void RegisterInputEvents()
+    private void RegisterEvents()
     {
         PlayerInput.Events.Movement += OnMovement;
+        EngineManager.Current.Events.EveryPhysicsUpdate += ApplyMovement;
     }
 
     private void OnMovement(Vector2 value)
     {
-        Debug.Log($"Movement: {value}");
+        currentMovement = value;
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    private void ApplyMovement()
     {
-        
+        CharacterMovement.ApplyMovement(currentMovement);
     }
 }

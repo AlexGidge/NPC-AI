@@ -41,7 +41,6 @@ public sealed class InputEvents
 
     public void Move(Vector2 value)
     {
-        if(value != Vector2.zero)
-            Movement?.Invoke(value);
+        Movement?.Invoke(value);
     }
 }
