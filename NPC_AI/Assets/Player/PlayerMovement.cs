@@ -31,18 +31,18 @@ public class PlayerMovement : MonoBehaviour
         CharacterMovement.ApplyMovement(PlayerInput.MovementVector);
     }
     
+    private void LookAtPoint(Vector3 point)
+    {
+        CharacterMovement.SetLookPoint(point);
+    }
+    
     private void ApplyRotation()
     {
-        CharacterMovement.RotateToTarget();
+        CharacterMovement.Rotate();
     }
 
     private void ApplyRotation(Vector2 direction)
     {
         CharacterMovement.LookInDirection(direction);
-    }
-    
-    private void LookAtPoint(Vector3 point)
-    {
-        CharacterMovement.LookAtPoint(point);
     }
 }
