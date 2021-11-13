@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BehaviourTree
+﻿namespace BehaviourTree
 {
     public abstract class Root<T> : Node<T> where T : TreeContext
     {

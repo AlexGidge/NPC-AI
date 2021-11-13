@@ -4,92 +4,139 @@ namespace BehaviourTree
 {
     public abstract class BranchSequence<T> : Branch<T> where T : TreeContext
     {
-        public BranchSequence(T _context, BranchType branchType) : base(_context, branchType)
+        protected readonly bool BreakOnFailure;
+        
+        public BranchSequence(T _context, BranchType branchType, bool breakOnFailure) : base(_context, branchType)
         {
+            BreakOnFailure = breakOnFailure;
+        }
+
+        public override NodeResult Initialise()
+        {
+            return Process();
         }
 
         public override NodeResult Process()
         {
-            return ProcessSequence();
-        }
-        
-        private NodeResult ProcessSequence()
-        {
             switch (BranchType)
             {
-                case BranchType.PopQueue:
-                    return RunPopQueue();
+                case BranchType.Await:
+                    return RunChildrenSync();
                 case BranchType.Async:
-                    return RunAsyncSequence();
+                    return RunChildrenAsync();
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
-        private NodeResult RunAsyncSequence()
+        /// <summary>
+        /// Runs 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        private NodeResult RunChildrenAsync()
         {
-            NodeResult result = NodeResult.Success;
-
+            CurrentState = NodeResult.Processing;
+            
             foreach (Node<T> child in Children)
             {
-                NodeResult childResult;
-                
-                if (child.CurrentState.ResultState == NodeResultState.Processing)
+                NodeResult childResult = HandleChild(child);
+                switch (childResult.ResultState)
                 {
-                    childResult = child.Process();
-                    //else success, continue to next
-                }
-                else if (child.CurrentState.ResultState == NodeResultState.New)
-                {
-                    childResult = child.Initialise();
-                }
-                else
-                {
-                    continue;
-                }
-                
-                if (childResult.ResultState == NodeResultState.Failure)
-                {
-                    //TODO: Handle Failures. 
-                }
-                else if (childResult.ResultState == NodeResultState.Processing)
-                {
-                    result = NodeResult.Processing;
+                    case NodeResultState.New:
+                        CurrentState = NodeResult.Processing;
+                        break;
+                    case NodeResultState.Success:
+                        //No change
+                        break;
+                    case NodeResultState.Failure:
+                        CurrentState = NodeResult.Failure;
+                        if (BreakOnFailure)
+                        {
+                            return CurrentState;
+                        }
+                        break;
+                    case NodeResultState.Processing:
+                        CurrentState = NodeResult.Processing;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
-
-            CurrentState = result;
+            
             return CurrentState;
         }
 
-        private NodeResult RunPopQueue()
+        private NodeResult HandleChild(Node<T> child) 
         {
-            NodeResult result;
-            
+            if (child != null)
+            {
+                NodeResult childResult;
+                switch (child.CurrentState.ResultState)
+                {
+                    case NodeResultState.New:
+                        childResult = child.Initialise();
+                        break;
+                    case NodeResultState.Success:
+                        childResult = NodeResult.Success;
+                        break;
+                    case NodeResultState.Failure:
+                        childResult = NodeResult.Failure;
+                        break;
+                    case NodeResultState.Processing:
+                        childResult = child.Process();
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+                
+                return childResult;
+            }
+            return NodeResult.Success;
+        }
+
+        private NodeResult RunChildrenSync()
+        {
             if (CurrentNode == null)
             {
-                Node<T> nextNode = Children.Pop();
-                if (nextNode != null)
-                {
-                    CurrentNode = nextNode;
-                    result = StartCurrentChild();
-                }
-                else
-                {
-                    CurrentState = NodeResult.Success;//Return success when all children have passed
-                }
+                GetNextNode();
             }
-            else
+            
+            switch (HandleChild(CurrentNode).ResultState)
             {
-                result = RunCurrentChild();
-                if (result.ResultState == NodeResultState.Success)
-                {
-                    CurrentNode = null;
+                case NodeResultState.New://TODO: New vs processing
                     CurrentState = NodeResult.Processing;
-                }
+                    break;
+                case NodeResultState.Success:
+                    //Node complete so move to next
+                    CurrentNode = null;
+                    CurrentState = new NodeResult();
+                    break;
+                case NodeResultState.Failure:
+                    if (BreakOnFailure)
+                    {
+                        CurrentState = NodeResult.Failure;
+                        return CurrentState;
+                    }
+                    else
+                    {
+                        GetNextNode();
+                    }
+                    break;
+                case NodeResultState.Processing:
+                    CurrentState = NodeResult.Processing;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-
+            
             return CurrentState;
+        }
+
+        private void GetNextNode()
+        {
+            Node<T> nextNode = Children.Pop();
+            CurrentNode = nextNode;
         }
     }
 }

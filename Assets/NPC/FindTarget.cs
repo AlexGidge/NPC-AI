@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class FindTarget<T> : Leaf<T> where T : NPCContext
 {
-    public float VisionRange;
-
     public FindTarget(T _context) : base(_context)
     {
     }
@@ -14,13 +12,17 @@ public class FindTarget<T> : Leaf<T> where T : NPCContext
         Debug.Log("Finding target...");
         if (context.NpcMovement.HasActiveTarget())
         {
-            return NodeResult.Success;
+            CurrentState = NodeResult.Success;
         }
-        else return Process();
+        else CurrentState = Process();
+
+        return CurrentState;
     }
 
     public override NodeResult Process()//TODO: Run on collision?
     {
+        CurrentState = NodeResult.Processing;
+        
         GameObject[] possibleTargets = GameObject.FindGameObjectsWithTag("Player");
 
         foreach (GameObject go in possibleTargets)
@@ -30,12 +32,17 @@ public class FindTarget<T> : Leaf<T> where T : NPCContext
             {
                 context.NpcMovement.SetLookTarget(go);
                 Debug.Log("Target found");
-                return NodeResult.Success;
+                CurrentState = NodeResult.Success;
+                //TODO: Handling multiple target options
+            }
+            else
+            {
+                context.NpcMovement.ClearTarget();
+                CurrentState = NodeResult.Failure;
             }
         }
-        
-        Debug.Log("Failed to find target");
-        return NodeResult.Failure;
+
+        return CurrentState;
     }
 }
 

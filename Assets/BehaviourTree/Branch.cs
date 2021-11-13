@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 
 namespace BehaviourTree
 {
@@ -35,7 +33,7 @@ namespace BehaviourTree
     [Flags]
     public enum BranchType
     {
-        PopQueue,
-        Async,
+        Async,//Runs each node in LIFO, breakOnFailure will bubble up
+        Await,//Continuously runs entire sequence in LIFO order, bubbling up on failure
     }
 }

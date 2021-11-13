@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BehaviourTree
+﻿namespace BehaviourTree
 {
     public abstract class Node<T> : INode<T> where T : TreeContext
     {

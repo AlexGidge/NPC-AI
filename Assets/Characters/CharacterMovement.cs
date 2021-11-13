@@ -1,4 +1,3 @@
-using Cinemachine;
 using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
@@ -21,7 +20,13 @@ public class CharacterMovement : MonoBehaviour
     
     public bool HasActiveTarget()
     {
-        return (TargetObject != null && TargetObject.activeSelf);
+        return (TargetObject != null);
+    }
+    
+    public void ClearTarget()
+    {
+        TargetObject = null;
+        SetLookPoint(Vector3.zero);
     }
 
     public void ApplyMovement(Vector2 movement)
