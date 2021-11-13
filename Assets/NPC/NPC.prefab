@@ -77,6 +77,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5775768873969301275}
     m_Modifications:
+    - target: {fileID: 2642875278979600105, guid: b1352f715c7c48b46ba85fdef29231fe, type: 3}
+      propertyPath: VisionRange
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2642875278979600105, guid: b1352f715c7c48b46ba85fdef29231fe, type: 3}
+      propertyPath: VisionLostRange
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4548072602960800145, guid: b1352f715c7c48b46ba85fdef29231fe, type: 3}
       propertyPath: m_Name
       value: Character

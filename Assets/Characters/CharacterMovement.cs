@@ -7,6 +7,9 @@ public class CharacterMovement : MonoBehaviour
     private float MoveSpeed;
     private float RotationSpeed;
     private bool initialised;
+
+    public float VisionRange;
+    
     public GameObject TargetObject { get; set; }
     public Quaternion TargetRotation { get; set; }
 
