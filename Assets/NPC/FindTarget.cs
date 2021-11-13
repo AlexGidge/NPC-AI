@@ -12,23 +12,23 @@ public class FindTarget<T> : Leaf<T> where T : NPCContext
     public override NodeResult Initialise()
     {
         Debug.Log("Finding target...");
-        if (context.CharacterMovement.HasActiveTarget())
+        if (context.NpcMovement.HasActiveTarget())
         {
             return NodeResult.Success;
         }
         else return Process();
     }
 
-    public override NodeResult Process()//TODO: Process on collision?
+    public override NodeResult Process()//TODO: Run on collision?
     {
         GameObject[] possibleTargets = GameObject.FindGameObjectsWithTag("Player");
 
         foreach (GameObject go in possibleTargets)
         {
-            if (Vector2.Distance(context.CharacterMovement.transform.position, go.transform.position) <
-                context.CharacterMovement.VisionRange)
+            if (Vector2.Distance(context.NpcMovement.transform.position, go.transform.position) <
+                context.NpcMovement.VisionRange)
             {
-                context.CharacterMovement.SetLookTarget(go);
+                context.NpcMovement.SetLookTarget(go);
                 Debug.Log("Target found");
                 return NodeResult.Success;
             }

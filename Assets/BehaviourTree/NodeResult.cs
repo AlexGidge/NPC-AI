@@ -24,9 +24,14 @@
             
             ResultState = result;
         }
+
+        public NodeResult()
+        {
+            ResultState = NodeResultState.New;
+        }
         
         public NodeResultState ResultState { get; private set; }
-    }
+    }//TODO: AreEqual / Comparison to just check status?
 
     public enum NodeResultState
     {

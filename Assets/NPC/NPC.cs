@@ -5,7 +5,7 @@ public class NPC : MonoBehaviour
     public Rigidbody2D NPCRigidBody;
     public float NPCMoveSpeed;
     public float NPCRotationSpeed;
-    public CharacterMovement NPCMovement;
+    public NPCMovement NPCMovement;
     public NPCBrain npcBrain;
     public NPCContext npcContext;
     
@@ -44,7 +44,7 @@ public class NPC : MonoBehaviour
     {
         NPCContext context = new NPCContext()
         {
-            CharacterMovement = NPCMovement
+            NpcMovement = NPCMovement
         };
         return context;
     }

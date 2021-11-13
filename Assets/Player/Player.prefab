@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3225347847182775934}
   - component: {fileID: 7162153879072468343}
   - component: {fileID: 177996094}
+  - component: {fileID: 2942486017087516831}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -48,8 +49,8 @@ MonoBehaviour:
   PlayerInput: {fileID: 0}
   CharacterMovement: {fileID: 3413065865303939257}
   PlayerRigidBody: {fileID: 177996094}
-  PlayerMoveSpeed: 50
-  PlayerRotationSpeed: 0.25
+  PlayerMoveSpeed: 1500
+  PlayerRotationSpeed: 1
   currentMovement: {x: 0, y: 0}
 --- !u!50 &177996094
 Rigidbody2D:
@@ -72,6 +73,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &2942486017087516831
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3225347847182775933}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.2
 --- !u!1001 &8614002679662937141
 PrefabInstance:
   m_ObjectHideFlags: 0

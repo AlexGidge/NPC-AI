@@ -4,11 +4,14 @@ namespace BehaviourTree
 {
     public abstract class Node<T> : INode<T> where T : TreeContext
     {
+        public NodeResult CurrentState;
+        
         public T context { get; private set; }
         
         public Node(T _context)
         {
             SetContext(_context);
+            CurrentState = new NodeResult();
         }
         
         public void SetContext(T _context)
@@ -16,7 +19,7 @@ namespace BehaviourTree
             context = _context;
         }
 
-        public abstract NodeResult Initialise();
+        public abstract NodeResult Initialise();//TODO: Rename initialise? Run?
         public abstract NodeResult Process();
     }
 

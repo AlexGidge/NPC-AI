@@ -3,6 +3,6 @@ using UnityEngine;
 
 public class NPCContext : TreeContext
 {
-    public CharacterMovement CharacterMovement;
+    public NPCMovement NpcMovement;
 
 }

@@ -7,8 +7,6 @@ public class CharacterMovement : MonoBehaviour
     private float MoveSpeed;
     private float RotationSpeed;
     private bool initialised;
-
-    public float VisionRange;
     
     public GameObject TargetObject { get; set; }
     public Quaternion TargetRotation { get; set; }
@@ -28,7 +26,12 @@ public class CharacterMovement : MonoBehaviour
 
     public void ApplyMovement(Vector2 movement)
     {
-        CharacterBody.AddForce(movement * MoveSpeed);
+        CharacterBody.AddForce(movement * MoveSpeed * Time.deltaTime);
+    }
+
+    public void MoveInDirectionOfTarget()
+    {
+        ApplyMovement(TargetRotation * Vector2.up);
     }
 
     public void LookInDirection(Vector2 direction)
@@ -41,7 +44,7 @@ public class CharacterMovement : MonoBehaviour
 
     public void SetLookPoint(Vector3 point)
     {
-        TargetRotation = VectorHelper.Calculate2DLookRotation(transform.position, point);
+        TargetRotation = VectorHelper.Calculate2DLookRotation(transform.position, point);//TODO: Refactor
     }
     
     public void Rotate()
@@ -54,7 +57,7 @@ public class CharacterMovement : MonoBehaviour
 
     public void SetLookTarget(GameObject go)
     {
-        TargetObject = go;
+        TargetObject = go;//TODO: SetLookTarget vs SetLookPoint 
     }
 
     public void SetRotationForTarget()

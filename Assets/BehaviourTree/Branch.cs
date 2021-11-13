@@ -35,6 +35,7 @@ namespace BehaviourTree
     [Flags]
     public enum BranchType
     {
-        Sequence,
+        PopQueue,
+        Async,
     }
 }

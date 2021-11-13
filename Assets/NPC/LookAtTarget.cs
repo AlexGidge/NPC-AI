@@ -10,27 +10,32 @@ public class LookAtTarget<T> : Leaf<T> where T : NPCContext
         public override NodeResult Initialise()
         {
             //TODO: Start processing? here or in generic?
-            if (context.CharacterMovement.HasActiveTarget())
+            if (context.NpcMovement.HasActiveTarget())
             {
-                return NodeResult.Processing;
+                CurrentState = NodeResult.Processing;
             }
             else
             {
-                return NodeResult.Failure;
+                CurrentState = NodeResult.Failure;
             }
+
+            return CurrentState;
         }
         
         public override NodeResult Process()
         {
-            if (context.CharacterMovement.HasActiveTarget())
+            if (context.NpcMovement.HasActiveTarget())
             {
-                context.CharacterMovement.SetRotationForTarget();
-                context.CharacterMovement.Rotate();//TODO: Success if tollerable distance? Simultaniously run with move node/leaf?
-                return NodeResult.Processing;
+                context.NpcMovement.SetRotationForTarget();
+                context.NpcMovement.Rotate();//TODO: Success if tollerable distance? Simultaniously run with move node/leaf?
+                //TODO: Lose sight distance
+                CurrentState = NodeResult.Processing;
             }
             else
             {
-                return NodeResult.Failure;
+                CurrentState = NodeResult.Failure;
             }
+
+            return CurrentState;
         }
     }
