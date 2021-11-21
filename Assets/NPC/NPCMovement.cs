@@ -2,6 +2,4 @@
     {
         public float VisionRange;
         public float VisionLostDistance;
-
-
     }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3976271385485970137}
   - component: {fileID: 1144525774}
   - component: {fileID: 17742299}
+  - component: {fileID: 1611034376}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -105,6 +106,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 3
+--- !u!58 &1611034376
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5775768873969301272}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 3
 --- !u!1 &8023923643817987824
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0adf59581c7643eeb9ffd2acfe265b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VisionRange: 3
+  VisionRange: 2
   VisionLostDistance: 5
 --- !u!1 &8960242374706337170
 GameObject:

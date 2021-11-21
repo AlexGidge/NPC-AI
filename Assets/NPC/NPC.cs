@@ -57,7 +57,7 @@ public class NPC : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     { 
-        if (other.CompareTag("Player"))//TODO: Improve player detection
+        if (other.CompareTag("Player") || other.CompareTag("Ball"))//TODO: Improve player detection
         {
             npcBrain.VisionAlerted();
         }

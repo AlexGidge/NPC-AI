@@ -1,4 +1,7 @@
-﻿using BehaviourTree;
+﻿using System.Collections.Generic;
+using System.Linq;
+using BehaviourTree;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FindTarget<T> : Leaf<T> where T : NPCContext
@@ -23,7 +26,8 @@ public class FindTarget<T> : Leaf<T> where T : NPCContext
     {
         CurrentState = NodeResult.Processing;
         
-        GameObject[] possibleTargets = GameObject.FindGameObjectsWithTag("Player");
+        List<GameObject> possibleTargets = GameObject.FindGameObjectsWithTag("Player").ToList();
+        possibleTargets.AddRange( GameObject.FindGameObjectsWithTag("Ball"));
 
         foreach (GameObject go in possibleTargets)
         {

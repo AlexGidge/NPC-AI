@@ -674,7 +674,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185765559}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2373353, y: -0.036564693, z: -10}
+  m_LocalPosition: {x: 2.6, y: 3.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 436341993}
@@ -1141,7 +1141,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2373353, y: -0.036564693, z: -10}
+  m_LocalPosition: {x: 2.6, y: 3.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2842,27 +2842,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7d9ecacc372d644ba1d483333840151, type: 3}
---- !u!1 &1611034375 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5775768873969301272, guid: c7d9ecacc372d644ba1d483333840151, type: 3}
-  m_PrefabInstance: {fileID: 1611034374}
-  m_PrefabAsset: {fileID: 0}
---- !u!58 &1611034376
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1611034375}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 3
 --- !u!1001 &1659083315
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9437,6 +9416,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoccerBall
       objectReference: {fileID: 0}
+    - target: {fileID: 8214786047440763282, guid: 446157125cfc54c419707eaa6a461be4, type: 3}
+      propertyPath: m_TagString
+      value: Ball
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 446157125cfc54c419707eaa6a461be4, type: 3}
 --- !u!1001 &1052712290378934412
@@ -9585,11 +9568,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3225347847182775934, guid: 587e2f42129d69649af72d0508a612c3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.2373353
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 3225347847182775934, guid: 587e2f42129d69649af72d0508a612c3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.036564693
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 3225347847182775934, guid: 587e2f42129d69649af72d0508a612c3, type: 3}
       propertyPath: m_LocalPosition.z
