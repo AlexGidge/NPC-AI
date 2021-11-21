@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NPCRigidBody: {fileID: 3976271385485970137}
-  NPCMoveSpeed: 1000
-  NPCRotationSpeed: 0.01
+  NPCMoveSpeed: 1200
+  NPCRotationSpeed: 0.1
+  NPCIdleTime: 1.5
   NPCMovement: {fileID: 3203779041736899978}
 --- !u!50 &3976271385485970137
 Rigidbody2D:
@@ -131,8 +132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0adf59581c7643eeb9ffd2acfe265b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VisionRange: 2
-  VisionLostDistance: 2.1
+  VisionRange: 3
+  VisionLostDistance: 5
 --- !u!1 &8960242374706337170
 GameObject:
   m_ObjectHideFlags: 0

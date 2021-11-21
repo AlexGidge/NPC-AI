@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
     /// <summary>
@@ -8,6 +9,7 @@ public class NPC : MonoBehaviour
     public Rigidbody2D NPCRigidBody;
     public float NPCMoveSpeed;
     public float NPCRotationSpeed;
+    public float NPCIdleTime;
     public NPCMovement NPCMovement;
     public NPCBrain npcBrain;
     public NPCContext npcContext;
@@ -47,8 +49,17 @@ public class NPC : MonoBehaviour
     {
         NPCContext context = new NPCContext()
         {
-            NpcMovement = NPCMovement
+            NpcMovement = NPCMovement,
+            IdleTime = NPCIdleTime
         };
         return context;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    { 
+        if (other.CompareTag("Player"))//TODO: Improve player detection
+        {
+            npcBrain.VisionAlerted();
+        }
     }
 }

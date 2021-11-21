@@ -17,21 +17,24 @@ namespace BehaviourTree
         public override NodeResult Start()
         {
             CurrentNode = GetRootNode();
-            return NodeResult.Processing;
+            CurrentState = NodeResult.New;
+            return CurrentState;
         }
 
         public override NodeResult Process()
         {
             if (CurrentNode == null)
             {
-                CurrentNode = GetRootNode();
+                Start();
             }
 
             switch (CurrentNode.CurrentState.ResultState)
             {
+                case NodeResultState.New:
+                    return CurrentNode.Start();
                 case NodeResultState.Success:
                     Debug.Log("NPC tree completed. Restarting sequence."); //TODO: Tree success
-                    CurrentNode = null;
+                    RestartTree();
                     return NodeResult.Success;
                 case NodeResultState.Failure:
                     Debug.Log("Failure at NPC tree. Restarting sequence."); //TODO: Tree failure
@@ -42,6 +45,11 @@ namespace BehaviourTree
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        protected void RestartTree()
+        {
+            CurrentNode = null;
         }
     }
 }

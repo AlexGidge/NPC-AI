@@ -24,6 +24,9 @@ namespace BehaviourTree
                 NodeResult childResult;
                 switch (child.CurrentState.ResultState)
                 {
+                    case NodeResultState.New:
+                        childResult = child.Start();
+                        break;
                     case NodeResultState.Success:
                         childResult = NodeResult.Success;
                         break;

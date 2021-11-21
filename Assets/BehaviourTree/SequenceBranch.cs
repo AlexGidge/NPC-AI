@@ -18,6 +18,9 @@ namespace BehaviourTree
             
             switch (ProcessChild(CurrentNode).ResultState)
             {
+                case NodeResultState.New:
+                    CurrentState = NodeResult.Processing;
+                    break;
                 case NodeResultState.Success:
                     //Node complete so move to next
                     CurrentNode = null;

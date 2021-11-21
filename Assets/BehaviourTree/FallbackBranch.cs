@@ -1,16 +1,13 @@
 ﻿using System;
-using Unity.VisualScripting;
 
 namespace BehaviourTree
 {
-    public abstract class ParallelBranch<T> : Branch<T> where T : TreeContext
+    public abstract class FallbackBranch<T> : Branch<T> where T : TreeContext
     {
-        //TODO: New thread for ticks to continue processing on each game tick?
-        
-        public ParallelBranch(T _context) : base(_context)
+        public FallbackBranch(T _context) : base(_context)
         {
         }
-
+        
         public override NodeResult Start()
         {
             return Process();
@@ -18,21 +15,18 @@ namespace BehaviourTree
 
         public override NodeResult Process()
         {
-            CurrentState = NodeResult.Processing;
-            
             foreach (Node<T> child in Children)
             {
-                NodeResult childResult = ProcessChild(child);
-                switch (childResult.ResultState)
+                switch (ProcessChild(child).ResultState)
                 {
                     case NodeResultState.New:
                         CurrentState = NodeResult.Processing;
                         break;
                     case NodeResultState.Success:
-                        //No change
-                        break;
+                        CurrentState = NodeResult.Success;
+                        return CurrentState;//One child succeeded so return
                     case NodeResultState.Failure:
-                        CurrentState = NodeResult.Failure;
+                        //Do nothing on failure
                         break;
                     case NodeResultState.Processing:
                         CurrentState = NodeResult.Processing;

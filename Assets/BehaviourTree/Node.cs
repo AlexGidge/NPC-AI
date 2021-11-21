@@ -13,7 +13,7 @@
         public Node(T _context)
         {
             SetContext(_context);
-            CurrentState = NodeResult.Processing;
+            CurrentState = NodeResult.New;
         }
         
         public void SetContext(T _context)
