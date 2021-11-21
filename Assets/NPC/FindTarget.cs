@@ -7,7 +7,7 @@ public class FindTarget<T> : Leaf<T> where T : NPCContext
     {
     }
 
-    public override NodeResult Initialise()
+    public override NodeResult Start()
     {
         Debug.Log("Finding target...");
         if (context.NpcMovement.HasActiveTarget())

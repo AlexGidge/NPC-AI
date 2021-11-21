@@ -1,5 +1,8 @@
 using UnityEngine;
 
+    /// <summary>
+    /// NPC Director
+    /// </summary>
 public class NPC : MonoBehaviour
 {
     public Rigidbody2D NPCRigidBody;
@@ -21,7 +24,7 @@ public class NPC : MonoBehaviour
         
         npcContext = GenerateNPCContext();
         npcBrain = new NPCBrain(npcContext);
-        npcBrain.Initialise();
+        npcBrain.Start();
 
     }
 

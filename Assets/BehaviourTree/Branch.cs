@@ -11,29 +11,35 @@ namespace BehaviourTree
         public Node<T> CurrentNode { get; set; }
         public Stack<Node<T>> Children { get; set; }
         public abstract void PopulateChildren();
-        public BranchType BranchType;
 
-        public Branch(T _context, BranchType branchType) : base(_context)
+        public Branch(T _context) : base(_context)
         {
-            BranchType = branchType;
             PopulateChildren();
         }
-
-        protected NodeResult StartCurrentChild()
-        {
-            return CurrentNode.Initialise();
-        }
         
-        protected NodeResult RunCurrentChild()
+        protected NodeResult ProcessChild(Node<T> child) 
         {
-            return CurrentNode.Process();
+            if (child != null)
+            {
+                NodeResult childResult;
+                switch (child.CurrentState.ResultState)
+                {
+                    case NodeResultState.Success:
+                        childResult = NodeResult.Success;
+                        break;
+                    case NodeResultState.Failure:
+                        childResult = NodeResult.Failure;
+                        break;
+                    case NodeResultState.Processing:
+                        childResult = child.Process();
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+                
+                return childResult;
+            }
+            return NodeResult.Success;
         }
-    }
-    
-    [Flags]
-    public enum BranchType
-    {
-        Async,//Runs each node in LIFO, breakOnFailure will bubble up
-        Await,//Continuously runs entire sequence in LIFO order, bubbling up on failure
     }
 }

@@ -6,7 +6,7 @@
         {
         }
 
-        public override NodeResult Initialise()
+        public override NodeResult Start()
         {
             return Process();
         }

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using BehaviourTree;
 
-public class ChaseTarget<T> : BranchSequence<T> where T : NPCContext
+public class ChaseTarget<T> : ParallelBranch<T> where T : NPCContext
     {
-        public ChaseTarget(T _context) : base(_context, BranchType.Async, true)
+        public ChaseTarget(T _context) : base(_context)
         {
         }
 

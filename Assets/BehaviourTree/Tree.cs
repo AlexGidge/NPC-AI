@@ -14,7 +14,7 @@ namespace BehaviourTree
         
         public abstract Node<T> GetRootNode();
         
-        public override NodeResult Initialise()
+        public override NodeResult Start()
         {
             CurrentNode = GetRootNode();
             return NodeResult.Processing;
@@ -29,8 +29,6 @@ namespace BehaviourTree
 
             switch (CurrentNode.CurrentState.ResultState)
             {
-                case NodeResultState.New:
-                    return CurrentNode.Initialise();
                 case NodeResultState.Success:
                     Debug.Log("NPC tree completed. Restarting sequence."); //TODO: Tree success
                     CurrentNode = null;

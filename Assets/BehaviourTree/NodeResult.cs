@@ -21,13 +21,7 @@
 
         public NodeResult(NodeResultState result)
         {
-            
             ResultState = result;
-        }
-
-        public NodeResult()
-        {
-            ResultState = NodeResultState.New;
         }
         
         public NodeResultState ResultState { get; private set; }
@@ -35,7 +29,6 @@
 
     public enum NodeResultState
     {
-        New = 0,
         Success = 1,
         Failure = 2,
         Processing = 3

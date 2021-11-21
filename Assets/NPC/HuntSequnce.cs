@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using BehaviourTree;
 
-public class HuntSequence<T> : BranchSequence<T> where T : NPCContext
+public class HuntSequence<T> : SequenceBranch<T> where T : NPCContext
 {
-    public HuntSequence(T _context) : base(_context, BranchType.Await, true)
+    public HuntSequence(T _context) : base(_context)
     {
     }
 
