@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NPCRigidBody: {fileID: 3976271385485970137}
-  NPCMoveSpeed: 500
-  NPCRotationSpeed: 0.25
+  NPCMoveSpeed: 1000
+  NPCRotationSpeed: 0.01
   NPCMovement: {fileID: 3203779041736899978}
 --- !u!50 &3976271385485970137
 Rigidbody2D:
@@ -86,7 +86,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.26
 --- !u!1 &8023923643817987824
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,8 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0adf59581c7643eeb9ffd2acfe265b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VisionRange: 1.25
-  VisionLostDistance: 1.75
+  VisionRange: 2
+  VisionLostDistance: 2.1
 --- !u!1 &8960242374706337170
 GameObject:
   m_ObjectHideFlags: 0
