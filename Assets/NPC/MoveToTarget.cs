@@ -16,7 +16,7 @@ public class MoveToTarget<T> : Leaf<T> where T : NPCContext
                 if (Vector2.Distance(context.NpcMovement.transform.position,
                     context.NpcMovement.TargetObject.transform.position) < context.NpcMovement.VisionLostDistance)
                 {
-                    context.NpcMovement.MoveInDirectionOfTarget(); 
+                    context.NpcMovement.MoveInDirectionOfTarget();
                     
                     //TODO: Success if tolerable distance? Simultaneously run with move node/leaf?
                 }

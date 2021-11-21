@@ -29,7 +29,7 @@ public class FindTarget<T> : Leaf<T> where T : NPCContext
         List<GameObject> possibleTargets = GameObject.FindGameObjectsWithTag("Player").ToList();
         possibleTargets.AddRange( GameObject.FindGameObjectsWithTag("Ball"));
 
-        foreach (GameObject go in possibleTargets)
+        foreach (GameObject go in possibleTargets.OrderBy(x => Vector2.Distance(context.NpcMovement.transform.position, x.transform.position)))
         {
             if (Vector2.Distance(context.NpcMovement.transform.position, go.transform.position) <
                 context.NpcMovement.VisionRange)

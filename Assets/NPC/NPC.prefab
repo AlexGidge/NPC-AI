@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5775768873969301275}
+  - component: {fileID: 5945737112798316136}
   - component: {fileID: 4260340995658274065}
   - component: {fileID: 3976271385485970137}
   - component: {fileID: 1144525774}
@@ -32,10 +33,26 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1419635336871992234}
+  - {fileID: 1396788019675775440}
+  - {fileID: 7333659858465693612}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5945737112798316136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5775768873969301272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0adf59581c7643eeb9ffd2acfe265b1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BallPosition: {fileID: 7333659858465693612}
+  VisionRange: 2
+  VisionLostDistance: 5
 --- !u!114 &4260340995658274065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52,7 +69,7 @@ MonoBehaviour:
   NPCMoveSpeed: 2400
   NPCRotationSpeed: 0.15
   NPCIdleTime: 1.5
-  NPCMovement: {fileID: 3203779041736899978}
+  NPCMovement: {fileID: 5945737112798316136}
 --- !u!50 &3976271385485970137
 Rigidbody2D:
   serializedVersion: 4
@@ -122,7 +139,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 3
---- !u!1 &8023923643817987824
+--- !u!1 &6008486978443447195
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,44 +147,28 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1419635336871992234}
-  - component: {fileID: 3203779041736899978}
+  - component: {fileID: 7333659858465693612}
   m_Layer: 0
-  m_Name: Character
+  m_Name: BallDribblePosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1419635336871992234
+--- !u!4 &7333659858465693612
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8023923643817987824}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 6008486978443447195}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.33, y: 6.2354836, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1396788019675775440}
+  m_Children: []
   m_Father: {fileID: 5775768873969301275}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3203779041736899978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8023923643817987824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0adf59581c7643eeb9ffd2acfe265b1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VisionRange: 2
-  VisionLostDistance: 5
 --- !u!1 &8960242374706337170
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,11 +193,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8960242374706337170}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1419635336871992234}
+  m_Father: {fileID: 5775768873969301275}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &4116288015484999224

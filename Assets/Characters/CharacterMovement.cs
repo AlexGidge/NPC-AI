@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
@@ -6,9 +7,12 @@ public class CharacterMovement : MonoBehaviour
     private float MoveSpeed;
     private float RotationSpeed;
     private bool initialised;
-    
-    public GameObject TargetObject { get; set; }
+
+    public Transform BallPosition;
+
+    public GameObject TargetObject { get; private set; }
     public Quaternion TargetRotation { get; set; }
+    public BallController BallInPossession { get; set; }
 
     public void Initialise(Rigidbody2D rigidBody, float moveSpeed, float rotationSpeed)
     {
@@ -17,7 +21,26 @@ public class CharacterMovement : MonoBehaviour
         RotationSpeed = rotationSpeed;
         initialised = true;
     }
-    
+
+    public bool HasBall()
+    {
+        return BallInPossession != null;
+    }
+
+    public void PickupBall(BallController ball)
+    {
+        if (!HasBall())
+        {
+            BallInPossession = ball;
+            ball.ChangePossession(this);
+        }
+    }
+
+    public void BallTackled()
+    {
+        BallInPossession = null;
+    }
+
     public bool HasActiveTarget()
     {
         return (TargetObject != null);
@@ -26,6 +49,8 @@ public class CharacterMovement : MonoBehaviour
     public void ClearTarget()
     {
         TargetObject = null;
+        BallInPossession?.DropBall(this);
+        BallInPossession = null;
         SetLookPoint(Vector3.zero);
     }
 
@@ -70,6 +95,15 @@ public class CharacterMovement : MonoBehaviour
         if (HasActiveTarget())
         {
             TargetRotation = VectorHelper.Calculate2DLookRotation(transform.position, TargetObject.transform.position);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.collider.CompareTag("Ball"))
+        {
+            BallController ballController = other.collider.gameObject.GetComponent<BallController>();
+            PickupBall(ballController);
         }
     }
 }
