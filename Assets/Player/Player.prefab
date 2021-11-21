@@ -49,7 +49,7 @@ MonoBehaviour:
   PlayerInput: {fileID: 0}
   CharacterMovement: {fileID: 3413065865303939257}
   PlayerRigidBody: {fileID: 177996094}
-  PlayerMoveSpeed: 1500
+  PlayerMoveSpeed: 3000
   PlayerRotationSpeed: 1
   currentMovement: {x: 0, y: 0}
 --- !u!50 &177996094
@@ -64,7 +64,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDrag: 10
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -96,6 +96,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3225347847182775934}
     m_Modifications:
+    - target: {fileID: 1523171390796702524, guid: f8d06fe49c6fcb04faf7570a828defd1, type: 3}
+      propertyPath: m_Size.x
+      value: 0.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523171390796702524, guid: f8d06fe49c6fcb04faf7570a828defd1, type: 3}
+      propertyPath: m_Size.y
+      value: 0.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523171390796702524, guid: f8d06fe49c6fcb04faf7570a828defd1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a6b6ef5828d5f0a4cb07f69603a6a7ca, type: 3}
+    - target: {fileID: 1523171390796702524, guid: f8d06fe49c6fcb04faf7570a828defd1, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566361017681720532, guid: f8d06fe49c6fcb04faf7570a828defd1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566361017681720532, guid: f8d06fe49c6fcb04faf7570a828defd1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566361017681720532, guid: f8d06fe49c6fcb04faf7570a828defd1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 4579902137043988142, guid: f8d06fe49c6fcb04faf7570a828defd1, type: 3}
       propertyPath: m_RootOrder
       value: 0
