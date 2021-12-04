@@ -1,4 +1,6 @@
 using System;
+using BehaviourTree;
+using UnityEditor;
 using UnityEngine;
 
     /// <summary>
@@ -63,3 +65,23 @@ public class NPC : MonoBehaviour
         }
     }
 }
+
+#if UNITY_EDITOR
+
+[CustomEditor(typeof(NPC))]
+public class LevelScriptEditor : Editor 
+{
+    public override void OnInspectorGUI()
+    {
+        if (target != null)
+        {
+            NPC npc = (NPC) target;
+            EditorGUILayout.LabelField("Current State", Enum.GetName(typeof(NodeResult), npc.npcBrain.CurrentState));
+            EditorGUILayout.LabelField("Current Node", npc.npcBrain.CurrentNode.GetType().ToString());
+            EditorGUILayout.LabelField("Context", npc.npcBrain.CurrentNode.context.ToString());
+        }
+    }
+}
+
+
+#endif

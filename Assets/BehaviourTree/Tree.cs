@@ -39,6 +39,7 @@ namespace BehaviourTree
                 case NodeResultState.Failure:
                     Debug.Log("Failure at NPC tree. Restarting sequence."); //TODO: Tree failure
                     CurrentNode = null;
+                    RestartTree();
                     return NodeResult.Failure;
                 case NodeResultState.Processing:
                     return CurrentNode.Process(); //TODO: Async

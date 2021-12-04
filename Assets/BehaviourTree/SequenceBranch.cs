@@ -15,34 +15,48 @@ namespace BehaviourTree
             {
                 GetNextNode();
             }
-            
-            switch (ProcessChild(CurrentNode).ResultState)
+
+            if (CurrentNode != null)
             {
-                case NodeResultState.New:
-                    CurrentState = NodeResult.Processing;
-                    break;
-                case NodeResultState.Success:
-                    //Node complete so move to next
-                    CurrentNode = null;
-                    CurrentState = NodeResult.Processing;
-                    break;
-                case NodeResultState.Failure:
-                    CurrentState = NodeResult.Failure;
-                    return CurrentState;//Break on failure
-                case NodeResultState.Processing:
-                    CurrentState = NodeResult.Processing;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                switch (ProcessChild(CurrentNode).ResultState)
+                {
+                    case NodeResultState.New:
+                        CurrentState = NodeResult.Processing;
+                        break;
+                    case NodeResultState.Success:
+                        //Node complete so move to next
+                        CurrentNode = null;
+                        CurrentState = NodeResult.Success;
+                        break;
+                    case NodeResultState.Failure:
+                        CurrentState = NodeResult.Failure;
+                        return CurrentState; //Break on failure
+                    case NodeResultState.Processing:
+                        CurrentState = NodeResult.Processing;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             }
-            
+            else
+            {
+                CurrentState = NodeResult.Failure;//TODO: Throw exception?
+            }
+
             return CurrentState;
         }
         
         private void GetNextNode()
         {
-            Node<T> nextNode = Children.Pop();
-            CurrentNode = nextNode;
+            if (Children.Count > 0)
+            {
+                Node<T> nextNode = Children.Pop();
+                CurrentNode = nextNode;
+            }
+            else
+            {
+                CurrentNode = null;
+            }
         }
 
 

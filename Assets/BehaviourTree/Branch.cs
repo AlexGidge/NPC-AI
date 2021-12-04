@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace BehaviourTree
 {
@@ -17,32 +18,26 @@ namespace BehaviourTree
             PopulateChildren();
         }
         
-        protected NodeResult ProcessChild(Node<T> child) 
+        protected NodeResult ProcessChild(Node<T> child)
         {
-            if (child != null)
+            if (child == null)
             {
-                NodeResult childResult;
-                switch (child.CurrentState.ResultState)
-                {
-                    case NodeResultState.New:
-                        childResult = child.Start();
-                        break;
-                    case NodeResultState.Success:
-                        childResult = NodeResult.Success;
-                        break;
-                    case NodeResultState.Failure:
-                        childResult = NodeResult.Failure;
-                        break;
-                    case NodeResultState.Processing:
-                        childResult = child.Process();
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-                
-                return childResult;
+                throw new ArgumentException("ProcessChild: Child was null",nameof(child));
             }
-            return NodeResult.Success;
+
+            switch (child.Process().ResultState)
+            {
+                case NodeResultState.New:
+                    return child.Start();
+                case NodeResultState.Success:
+                    return NodeResult.Success;
+                case NodeResultState.Failure:
+                    return NodeResult.Failure;
+                case NodeResultState.Processing:
+                    return child.Process();
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

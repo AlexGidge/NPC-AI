@@ -9,7 +9,7 @@
         public NodeResult CurrentState;
         
         public T context { get; private set; }
-        
+
         public Node(T _context)
         {
             SetContext(_context);

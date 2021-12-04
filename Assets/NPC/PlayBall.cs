@@ -14,7 +14,7 @@ public class PlayBall<T> : SequenceBranch<T> where T : NPCContext
     public override void PopulateChildren()
     {
         Children = new Stack<Node<T>>();
-        //Get Ball
-
+        Children.Push(new ChaseTarget<T>(context));
+        Children.Push(new FindTarget<T>(context));
     }
 }

@@ -36,7 +36,7 @@ public class BallController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (CurrentPossessor != null)
+        if (CurrentPossessor != null && transform.parent != null)
         {
             //TODO: Add force in direction of 0,0,0
             transform.localPosition = Vector3.zero;
